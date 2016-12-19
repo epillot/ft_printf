@@ -34,7 +34,7 @@ void		signed_int_convert(char **str, t_strform *st, va_list ap)
 	intmax_t	n;
 
 	n = get_param_for_signed_conv(ap, st);
-	*str = ft_itoa_base_signed_conv(n, 10, st);
+	*str = ft_itoa_signed_conv(n, st);
 }
 
 char		*string_format(const char **s, t_strform *st, va_list ap)

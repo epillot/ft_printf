@@ -16,6 +16,5 @@
 
 int main()
 {
-	int n = 1;
-	printf("%-+10d", n);
+	printf("%+-10.5d", 1);
 }

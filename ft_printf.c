@@ -39,6 +39,6 @@ int		ft_printf(const char *format, ...)
 
 int main()
 {
-	ft_printf("%-+20.7d\n", 3);
-	printf("%-+20.7d\n", 3);
+	ft_printf("%-10.d\n", 0);
+	printf("%-10.d\n", 0);
 }

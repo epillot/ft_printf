@@ -44,7 +44,7 @@ void	get_precision(const char **format, t_strform *st)
 	if (ft_isdigit(**format))
 		st->precision = ft_atoi(*format);
 	else
-		st->precision = -1;
+		st->precision = 0;
 	while (ft_isdigit(**format))
 		(*format)++;
 	(*format)--;

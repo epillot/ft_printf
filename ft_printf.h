@@ -44,6 +44,12 @@ typedef struct	s_strform
 	char		convert_id;
 }				t_strform;
 
+typedef struct	s_nconv
+{
+	int size_n;
+	int size;
+}		t_nconv;
+
 int				is_convert_id(const char c);
 int				is_flag(const char c);
 int				is_length_info(const char c);
@@ -53,6 +59,6 @@ char			*string_format(const char **s, t_strform *st, va_list ap);
 intmax_t		get_param_for_signed_conv(va_list ap, t_strform *st);
 uintmax_t		get_param_for_unsigned_conv(va_list ap, t_strform *st);
 int				number_size(int n, int base);
-char			*ft_itoa_base_signed_conv(intmax_t n, int base, t_strform *st);
+char			*ft_itoa_signed_conv(intmax_t n, t_strform *st);
 
 #endif
