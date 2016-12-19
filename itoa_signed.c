@@ -72,7 +72,6 @@ char		*ft_itoa_signed_conv(intmax_t n, t_strform *st)
 	if (!(output = ft_strnew(info.size)))
 		return (NULL);
 	i = apply_option(n, output, st, info);
-	ft_print_memory(output, info.size);
 	while (info.size_n > 0)
 	{
 		output[info.size_n - 1 + i] = dig[ft_abs(n % 10)];

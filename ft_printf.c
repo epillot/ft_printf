@@ -34,11 +34,12 @@ int		ft_printf(const char *format, ...)
 			format++;
 		}
 	}
+	va_end(ap);
 	return (1);
 }
 
 int main()
 {
-	ft_printf("%-10.d\n", 0);
-	printf("%-10.d\n", 0);
+	ft_printf("%+.3d\n", 0);
+	printf("%+.3d\n", 0);
 }
