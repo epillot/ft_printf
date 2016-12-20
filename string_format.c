@@ -6,7 +6,7 @@
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:46:48 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/13 16:58:46 by epillot          ###   ########.fr       */
+/*   Updated: 2016/12/20 13:41:22 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,8 @@ static void	adjust_strform(t_strform *st)
 		st->flag.sign = ' ';
 	else if (st->flag.sign == 1)
 		st->flag.sign = '+';
-}
-
-void		signed_int_convert(char **str, t_strform *st, va_list ap)
-{
-	intmax_t	n;
-
-	n = get_param_for_signed_conv(ap, st);
-	*str = ft_itoa_signed_conv(n, st);
+	if (st->id == 'p')
+		st->flag.conv = 1;
 }
 
 char		*string_format(const char **s, t_strform *st, va_list ap)
@@ -44,8 +38,12 @@ char		*string_format(const char **s, t_strform *st, va_list ap)
 	init_strform(st);
 	fill_strform(s, st);
 	adjust_strform(st);
-	if (st->convert_id == 'd' || st->convert_id == 'i' || st->convert_id == 'D')
-		signed_int_convert(&str, st, ap);
+	if (is_signed_conv(*st))
+		signed_int_convert(&str, *st, ap);
+	else if (is_unsigned_conv(*st))
+		unsigned_int_convert(&str, *st, ap);
+	else if (is_char_conv(*st))
+		char_convert(&str, *st, ap);
 	else
 		str = ft_strdup("");
 	return (str);

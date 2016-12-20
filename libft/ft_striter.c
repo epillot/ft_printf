@@ -1,43 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/08 11:55:24 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/15 17:03:47 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+void	ft_striter(char *s, void (*f)(char *))
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
-
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	while (*s)
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		(*f)(s);
+		s++;
 	}
-	va_end(ap);
-	return (ret);
 }

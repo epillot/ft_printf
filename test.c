@@ -6,15 +6,16 @@
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 11:09:07 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/13 11:30:58 by epillot          ###   ########.fr       */
+/*   Updated: 2016/12/20 16:23:02 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft.h"
+#include "ft_printf.h"
 #include <locale.h>
 
 int main()
 {
-	printf("%+-10.5d", 1);
+	setlocale(LC_ALL, "");
+	ft_printf("%lc\n", 431);
+	printf("%lc\n", 431);
 }

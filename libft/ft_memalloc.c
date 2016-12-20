@@ -1,43 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/07 10:49:59 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/02 12:57:21 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+void	*ft_memalloc(size_t size)
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
+	void *new;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
-	}
-	va_end(ap);
-	return (ret);
+	new = malloc(size);
+	if (new == NULL)
+		return (NULL);
+	ft_bzero(new, size);
+	return (new);
 }

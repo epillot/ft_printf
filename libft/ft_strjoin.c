@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/08 13:00:26 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/25 12:22:04 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
+	size_t	i;
+	char	*new;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
-	}
-	va_end(ap);
-	return (ret);
+	i = 0;
+	if ((new = ft_strnew(ft_strlen(s1) + ft_strlen(s2))) == NULL)
+		return (NULL);
+	new = ft_strcpy(new, s1);
+	new = ft_strcat(new, s2);
+	return (new);
 }

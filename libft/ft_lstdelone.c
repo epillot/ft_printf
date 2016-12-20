@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/09 14:04:53 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/22 17:26:49 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
+	t_list	*elem;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	if (*alst)
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		elem = *alst;
+		(*del)(elem->content, elem->content_size);
+		free(*alst);
+		*alst = NULL;
 	}
-	va_end(ap);
-	return (ret);
 }

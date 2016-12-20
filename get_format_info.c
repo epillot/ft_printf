@@ -6,7 +6,7 @@
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 10:06:26 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/13 16:58:08 by epillot          ###   ########.fr       */
+/*   Updated: 2016/12/15 15:50:38 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	get_flag_info(const char c, t_strform *st)
 {
 	if (c == '#')
-		st->flag.convert = 1;
+		st->flag.conv = 1;
 	else if (c == '0')
 		st->flag.zero = '0';
 	else if (c == '-')
@@ -69,7 +69,7 @@ void	fill_strform(const char **format, t_strform *st)
 			get_precision(format, st);
 		(*format)++;
 	}
-	st->convert_id = (is_convert_id(**format) ? **format : 0);
-	if (st->convert_id)
+	st->id = (is_convert_id(**format) ? **format : 0);
+	if (st->id)
 		(*format)++;
 }

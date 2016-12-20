@@ -1,43 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/09 17:59:27 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/09 18:58:26 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
+	t_list	*tmp1;
+	t_list	*tmp2;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	tmp1 = *alst;
+	tmp2 = tmp1->next;
+	while (tmp2)
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		ft_lstdelone(&tmp1, del);
+		tmp1 = tmp2;
+		tmp2 = tmp1->next;
 	}
-	va_end(ap);
-	return (ret);
+	ft_lstdelone(&tmp1, del);
+	*alst = NULL;
 }

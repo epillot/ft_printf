@@ -1,43 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/12/02 10:24:20 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/06 16:36:42 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+static void		ft_putnbr_aux_fd(int n, int fd)
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
+	if (n > 9 || n < -9)
+		ft_putnbr_aux_fd(n / 10, fd);
+	ft_putchar_fd('0' + ft_abs(n % 10), fd);
+}
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
-	}
-	va_end(ap);
-	return (ret);
+void			ft_putnbr_fd(int n, int fd)
+{
+	if (n < 0)
+		ft_putchar_fd('-', fd);
+	ft_putnbr_aux_fd(n, fd);
 }

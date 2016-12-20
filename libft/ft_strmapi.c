@@ -1,43 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/08 12:19:45 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/15 17:04:38 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
+	char	*new;
+	size_t	i;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	i = 0;
+	new = ft_strnew(ft_strlen(s));
+	if (new == NULL)
+		return (NULL);
+	while (s[i])
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		new[i] = (*f)(i, s[i]);
+		i++;
 	}
-	va_end(ap);
-	return (ret);
+	return (new);
 }

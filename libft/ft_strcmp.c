@@ -1,43 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/04 13:39:52 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/11 12:56:34 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int		ft_printf(const char *format, ...)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
-
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	while (*s1 && *s2 && *s1 == *s2)
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		s1++;
+		s2++;
 	}
-	va_end(ap);
-	return (ret);
+	return ((unsigned char)(*s1) - (unsigned char)(*s2));
 }

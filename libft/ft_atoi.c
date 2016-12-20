@@ -1,43 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/07 18:42:31 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/02 10:35:25 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+int		ft_atoi(const char *str)
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
+	int i;
+	int nbr;
+	int negative;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	nbr = 0;
+	negative = 0;
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '-')
+		negative = 1;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i] && ft_isdigit(str[i]))
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		nbr *= 10;
+		nbr += (int)str[i] - '0';
+		i++;
 	}
-	va_end(ap);
-	return (ret);
+	return (negative == 1 ? -nbr : nbr);
 }

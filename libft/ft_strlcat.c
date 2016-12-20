@@ -1,43 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/04 16:11:22 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/12 15:12:03 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
+	size_t	dst_len;
+	size_t	src_len;
+	size_t	i;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	src_len = ft_strlen(src);
+	i = 0;
+	while (dst[i] && i < size)
+		i++;
+	dst_len = i;
+	while (src[i - dst_len] && i < size - 1)
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		dst[i] = src[i - dst_len];
+		i++;
 	}
-	va_end(ap);
-	return (ret);
+	if (dst_len < size)
+		dst[i] = '\0';
+	return (src_len + dst_len);
 }

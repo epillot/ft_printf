@@ -1,43 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/07 16:37:02 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/02 12:36:56 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
-
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
-	}
-	va_end(ap);
-	return (ret);
+	if (src > dst || n == 0)
+		return (ft_memcpy(dst, src, n));
+	while (n--)
+		*(t_byte*)(dst + n) = *(t_byte*)(src + n);
+	return (dst);
 }

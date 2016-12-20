@@ -1,43 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   find_conv_id.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/12/14 16:57:25 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/20 15:47:10 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+int		is_signed_conv(t_strform st)
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
+	if (st.id == 'd' || st.id == 'i' || st.id == 'D')
+		return (1);
+	return (0);
+}
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
-	}
-	va_end(ap);
-	return (ret);
+int		is_unsigned_conv(t_strform st)
+{
+	if (is_octal_conv(st) || is_hexa_conv(st) || st.id == 'u'
+			|| st.id == 'U')
+		return (1);
+	return (0);
+}
+
+int		is_char_conv(t_strform st)
+{
+	if (st.id == 'c' || st.id == 'C' || st.id == '%')
+		return (1);
+	return (0);
 }

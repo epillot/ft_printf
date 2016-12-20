@@ -1,43 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/08 12:01:47 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/15 17:03:59 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
+	size_t	i;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	i = 0;
+	while (s[i])
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		(*f)(i, &s[i]);
+		i++;
 	}
-	va_end(ap);
-	return (ret);
 }

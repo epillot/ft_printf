@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/07 15:09:55 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/02 12:26:51 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
+	size_t i;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	i = 0;
+	while (i < n)
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		*((t_byte*)dst + i) = *((const t_byte*)src + i);
+		i++;
 	}
-	va_end(ap);
-	return (ret);
+	return (dst);
 }

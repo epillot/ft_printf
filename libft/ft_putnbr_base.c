@@ -1,43 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/20 16:21:18 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/10 18:07:24 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/06 13:57:03 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+static void		ft_putnbr_base_aux(int n, char *base)
 {
-	va_list		ap;
-	char		*s;
-	t_strform 	st;
-	int		ret;
+	int		base_len;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap);
-			ft_putstr(s);
-			ret += ft_strlen(s);
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
-	}
-	va_end(ap);
-	return (ret);
+	base_len = (int)ft_strlen(base);
+	if (n >= base_len || n <= -base_len)
+		ft_putnbr_base_aux(n / base_len, base);
+	ft_putchar(base[ft_abs(n % base_len)]);
+}
+
+void			ft_putnbr_base(int n, char *base)
+{
+	if (n < 0)
+		ft_putchar('-');
+	ft_putnbr_base_aux(n, base);
 }
