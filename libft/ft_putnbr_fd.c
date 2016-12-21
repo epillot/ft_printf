@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 11:09:07 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 17:42:30 by epillot          ###   ########.fr       */
+/*   Created: 2016/12/02 10:24:20 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/06 16:36:42 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <locale.h>
+#include "libft.h"
 
-int main()
+static void		ft_putnbr_aux_fd(int n, int fd)
 {
-	ft_printf("{%-010.Z}\n");
-	printf("{%-010.Z}\n");
+	if (n > 9 || n < -9)
+		ft_putnbr_aux_fd(n / 10, fd);
+	ft_putchar_fd('0' + ft_abs(n % 10), fd);
+}
+
+void			ft_putnbr_fd(int n, int fd)
+{
+	if (n < 0)
+		ft_putchar_fd('-', fd);
+	ft_putnbr_aux_fd(n, fd);
 }

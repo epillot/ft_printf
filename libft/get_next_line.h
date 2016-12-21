@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 11:09:07 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 17:42:30 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/18 17:23:35 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/30 18:47:12 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <locale.h>
+#ifndef GET_NEXT_LINE_H
 
-int main()
+# define GET_NEXT_LINE_H
+
+# define BUFF_SIZE 2
+
+typedef struct	s_buffer
 {
-	ft_printf("{%-010.Z}\n");
-	printf("{%-010.Z}\n");
-}
+	char			*to_add;
+	char			*buf_read;
+	int				size_to_add;
+	int				current_size_line;
+	int				fd;
+	struct s_buffer *next;
+	struct s_buffer *prev;
+}				t_buffer;
+
+int				get_next_line(const int fd, char **line);
+
+#endif

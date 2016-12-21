@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 11:09:07 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 17:42:30 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/11 15:00:13 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/11 15:08:15 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <locale.h>
+#include "libft.h"
 
-int main()
+void	ft_lstadd_back(t_list *alst, t_list *new)
 {
-	ft_printf("{%-010.Z}\n");
-	printf("{%-010.Z}\n");
+	while (alst->next)
+		alst = alst->next;
+	alst->next = new;
+	new->next = NULL;
 }

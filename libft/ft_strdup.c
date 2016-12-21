@@ -1,44 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 18:01:50 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/04 13:40:10 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/21 17:31:44 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+char		*ft_strdup(const char *src)
 {
-	va_list		ap;
-	char		*s;
-	t_option 	st;
-	int			ret;
-	int			size;
+	char	*dest;
+	size_t	i;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	i = 0;
+	dest = ft_strnew(sizeof(char) * ft_strlen(src));
+	if (dest == NULL)
+		return (NULL);
+	while (src[i])
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap, &size);
-			write(1, s, size);
-			ret += size;
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		dest[i] = src[i];
+		i++;
 	}
-	va_end(ap);
-	return (ret);
+	dest[i] = '\0';
+	return (dest);
 }

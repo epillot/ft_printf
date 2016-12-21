@@ -6,23 +6,23 @@
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 15:03:33 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/15 16:39:13 by epillot          ###   ########.fr       */
+/*   Updated: 2016/12/21 18:06:28 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		is_octal_conv(t_strform st)
+int		is_octal_conv(t_option st)
 {
 	return (st.id == 'o' || st.id == 'O');
 }
 
-int		is_hexa_conv(t_strform st)
+int		is_hexa_conv(t_option st)
 {
 	return (st.id == 'x' || st.id == 'X' || st.id == 'p');
 }
 
-int		get_base(t_strform st)
+int		get_base(t_option st)
 {
 	if (st.id == 'u' || st.id == 'U')
 		return (10);

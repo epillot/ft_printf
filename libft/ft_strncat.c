@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 18:01:50 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/04 15:03:41 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/07 10:43:00 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	va_list		ap;
-	char		*s;
-	t_option 	st;
-	int			ret;
-	int			size;
+	size_t	len_s1;
+	size_t	i;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	len_s1 = ft_strlen(s1);
+	i = 0;
+	while (s2[i] && i < n)
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap, &size);
-			write(1, s, size);
-			ret += size;
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		s1[len_s1 + i] = s2[i];
+		i++;
 	}
-	va_end(ap);
-	return (ret);
+	s1[len_s1 + i] = '\0';
+	return (s1);
 }

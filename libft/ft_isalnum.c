@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 11:09:07 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 17:42:30 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/07 19:15:14 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/08 15:57:31 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <locale.h>
+#include "libft.h"
 
-int main()
+int		ft_isalnum(int c)
 {
-	ft_printf("{%-010.Z}\n");
-	printf("{%-010.Z}\n");
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (1);
+	return (0);
 }

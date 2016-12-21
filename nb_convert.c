@@ -1,44 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   nb_convert.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 18:01:50 by epillot          ###   ########.fr       */
+/*   Created: 2016/12/21 16:09:13 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/21 18:04:45 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+void	d_convert(char **str, t_option st, va_list ap, int *size)
 {
-	va_list		ap;
-	char		*s;
-	t_option 	st;
-	int			ret;
-	int			size;
+	intmax_t	n;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap, &size);
-			write(1, s, size);
-			ret += size;
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
-	}
-	va_end(ap);
-	return (ret);
+	n = get_param_for_signed_conv(ap, st);
+	*str = d_to_formated_string(n, st, size);
+}
+
+void	u_convert(char **str, t_option st, va_list ap, int *size)
+{
+	uintmax_t	n;
+	int			base;
+
+	n = get_param_for_unsigned_conv(ap, st);
+	base = get_base(st);
+	*str = u_to_formated_string(n, base, st, size);
 }

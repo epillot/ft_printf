@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 11:09:07 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 17:42:30 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/04 13:40:31 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/29 18:50:01 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <locale.h>
+#include "libft.h"
 
-int main()
+size_t	ft_strlen(const char *s)
 {
-	ft_printf("{%-010.Z}\n");
-	printf("{%-010.Z}\n");
+	const char	*s2;
+
+	s2 = s;
+	while (*s2)
+		s2++;
+	return (s2 - s);
 }

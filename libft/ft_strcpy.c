@@ -1,44 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 18:01:50 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/04 13:39:31 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/25 12:56:44 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int		ft_printf(const char *format, ...)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	va_list		ap;
-	char		*s;
-	t_option 	st;
-	int			ret;
-	int			size;
+	int i;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	i = 0;
+	while (src[i])
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap, &size);
-			write(1, s, size);
-			ret += size;
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		dst[i] = src[i];
+		i++;
 	}
-	va_end(ap);
-	return (ret);
+	dst[i] = '\0';
+	return (dst);
 }

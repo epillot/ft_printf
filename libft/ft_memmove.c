@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 11:09:07 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 17:42:30 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/07 16:37:02 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/02 12:36:56 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <locale.h>
+#include "libft.h"
 
-int main()
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	ft_printf("{%-010.Z}\n");
-	printf("{%-010.Z}\n");
+	if (src > dst || n == 0)
+		return (ft_memcpy(dst, src, n));
+	while (n--)
+		*(t_byte*)(dst + n) = *(t_byte*)(src + n);
+	return (dst);
 }

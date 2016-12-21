@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 18:01:50 by epillot          ###   ########.fr       */
+/*   Created: 2016/11/04 18:29:54 by epillot           #+#    #+#             */
+/*   Updated: 2016/11/24 11:05:48 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+char	*ft_strrchr(const char *s, int c)
 {
-	va_list		ap;
-	char		*s;
-	t_option 	st;
-	int			ret;
-	int			size;
+	char	octet;
+	int		s_len;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	octet = c;
+	s_len = ft_strlen(s);
+	while (s_len >= 0)
 	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap, &size);
-			write(1, s, size);
-			ret += size;
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+		if (s[s_len] == octet)
+			return ((char*)(s + s_len));
+		s_len--;
 	}
-	va_end(ap);
-	return (ret);
+	return (NULL);
 }

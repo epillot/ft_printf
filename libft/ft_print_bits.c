@@ -1,44 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_print_bit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 18:01:50 by epillot          ###   ########.fr       */
+/*   Created: 2016/12/05 16:39:54 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/05 16:47:20 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+void	ft_print_bits(unsigned char octet)
 {
-	va_list		ap;
-	char		*s;
-	t_option 	st;
-	int			ret;
-	int			size;
+	int max;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
+	max = 128;
+	while (max)
 	{
-		if (*format == '%')
+		if (octet >= max)
 		{
-			format++;
-			s = string_format(&format, &st, ap, &size);
-			write(1, s, size);
-			ret += size;
-			free(s);
+			ft_putchar('1');
+			octet -= max;
 		}
 		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
+			ft_putchar('0');
+		max /= 2;
 	}
-	va_end(ap);
-	return (ret);
 }

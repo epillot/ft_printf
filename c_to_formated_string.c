@@ -1,44 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   c_to_formated_string.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 18:01:50 by epillot          ###   ########.fr       */
+/*   Created: 2016/12/21 16:21:49 by epillot           #+#    #+#             */
+/*   Updated: 2016/12/21 18:16:03 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+char	*c_to_formated_string(unsigned char c, t_option st, int *n)
 {
-	va_list		ap;
-	char		*s;
-	t_option 	st;
-	int			ret;
-	int			size;
+	char	*output;
+	int		size;
+	int		i;
 
-	ret = 0;
-	va_start(ap, format);
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			s = string_format(&format, &st, ap, &size);
-			write(1, s, size);
-			ret += size;
-			free(s);
-		}
-		else
-		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-		}
-	}
-	va_end(ap);
-	return (ret);
+	size = 1;
+	if (st.field_width > 1)
+		size = st.field_width;
+	*n = size;
+	if (!(output = ft_strnew(size)))
+		return (NULL);
+	i = (st.flag.left_adjust == 1 ? 1 : 0);
+	while (size-- > 1)
+		output[i++] = st.flag.width;
+	if (st.flag.left_adjust == 1)
+		i = 0;
+	output[i] = (char)c;
+	return (output);
 }
