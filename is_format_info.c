@@ -12,16 +12,6 @@
 
 #include "ft_printf.h"
 
-int	is_convert_id(const char c)
-{
-	if (c == 's' || c == 'S' || c == 'p' || c == 'd' || c == 'D'
-			|| c == 'b' || c == 'i' || c == 'o' || c == 'O'
-			|| c == 'u' || c == '%' || c == 'U' || c == 'x'
-			|| c == 'X' || c == 'c' || c == 'C')
-		return (1);
-	return (0);
-}
-
 int	is_flag(const char c)
 {
 	if (c == '#' || c == '0' || c == '-' || c == '+' || c == ' ')

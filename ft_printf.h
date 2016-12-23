@@ -50,7 +50,6 @@ typedef struct	s_size
 	int		tot;
 }				t_size;
 
-int				is_convert_id(const char c);
 int				is_flag(const char c);
 int				is_length_info(const char c);
 int				is_format_info(const char c);
