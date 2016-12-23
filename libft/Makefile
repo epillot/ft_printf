@@ -6,7 +6,7 @@
 #    By: epillot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 15:38:05 by epillot           #+#    #+#              #
-#    Updated: 2016/12/14 19:52:45 by epillot          ###   ########.fr        #
+#    Updated: 2016/12/23 14:41:54 by epillot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ SRC = ft_atoi.c\
 	  ft_strstr.c\
 	  ft_strsub.c\
 	  ft_tolower.c\
+	  ft_strupcase.c\
 	  ft_strsplit_lst.c\
 	  ft_toupper.c\
 	  ft_strtrim.c\

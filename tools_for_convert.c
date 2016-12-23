@@ -6,7 +6,7 @@
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 15:03:33 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 18:06:28 by epillot          ###   ########.fr       */
+/*   Updated: 2016/12/23 15:10:54 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,20 @@ int		get_base(t_option st)
 		return (8);
 	if (is_hexa_conv(st))
 		return (16);
+	return (2);
+}
+
+int		is_signed_conv(t_option st)
+{
+	if (st.id == 'd' || st.id == 'i' || st.id == 'D')
+		return (1);
 	return (0);
 }
 
-char		*ft_strupcase(char *s)
+int		is_unsigned_conv(t_option st)
 {
-	int i;
-	
-	i = 0;
-	while (*(s + i))
-	{
-		*(s + i) = ft_toupper(*(s + i));
-		i++;
-	}
-	return (s);
+	if (is_octal_conv(st) || is_hexa_conv(st) || st.id == 'u'
+			|| st.id == 'U' || st.id == 'b')
+		return (1);
+	return (0);
 }

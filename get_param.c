@@ -6,7 +6,7 @@
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 15:03:38 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 18:03:50 by epillot          ###   ########.fr       */
+/*   Updated: 2016/12/23 15:12:43 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ uintmax_t	get_param_for_unsigned_conv(va_list ap, t_option st)
 	else if (st.length.z >= 1 || st.id == 'p')
 		output = (uintmax_t)va_arg(ap, size_t);
 	else if (st.length.j >= 1)
-		output = va_arg(ap, uintmax_t);	
+		output = va_arg(ap, uintmax_t);
 	else if (st.length.h >= 2)
 		output = (uintmax_t)(unsigned char)va_arg(ap, unsigned int);
 	else if (st.length.h == 1)

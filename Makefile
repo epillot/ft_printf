@@ -6,7 +6,7 @@
 #    By: epillot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/14 19:24:31 by epillot           #+#    #+#              #
-#    Updated: 2016/12/21 16:41:23 by epillot          ###   ########.fr        #
+#    Updated: 2016/12/23 14:45:49 by epillot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,19 +16,16 @@ FLAG = -Wall -Wextra -Werror
 
 OPTION = -c
 
-SRC = find_conv_id.c\
-	  get_option.c\
+SRC = get_option.c\
 	  get_param.c\
 	  is_format_info.c\
-	  d_to_formated_string.c\
-	  u_to_formated_string.c\
-	  c_to_formated_string.c\
-	  wc_to_formated_string.c\
-	  ws_to_formated_string.c\
-	  s_to_formated_string.c\
-	  nb_convert.c\
-	  char_convert.c\
-	  string_format.c\
+	  d_convert.c\
+	  u_convert.c\
+	  c_convert.c\
+	  s_convert.c\
+	  wc_convert.c\
+	  ws_convert.c\
+	  str_format.c\
 	  encode_unicode.c\
 	  tools_for_convert.c\
 	  ft_printf.c\

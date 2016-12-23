@@ -6,7 +6,7 @@
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 17:38:22 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 18:04:14 by epillot          ###   ########.fr       */
+/*   Updated: 2016/12/23 15:15:52 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 int	is_convert_id(const char c)
 {
 	if (c == 's' || c == 'S' || c == 'p' || c == 'd' || c == 'D'
-			|| c == 'i' || c == 'o' || c == 'O' || c == 'u' || c == '%'
-			|| c == 'U' || c == 'x' || c == 'X' || c == 'c' || c == 'C')
+			|| c == 'b' || c == 'i' || c == 'o' || c == 'O'
+			|| c == 'u' || c == '%' || c == 'U' || c == 'x'
+			|| c == 'X' || c == 'c' || c == 'C')
 		return (1);
 	return (0);
 }
@@ -37,7 +38,8 @@ int	is_length_info(const char c)
 
 int	is_format_info(const char c)
 {
-	if (is_flag(c) || is_length_info(c) || ft_isdigit(c) || c == '.')
+	if (is_flag(c) || is_length_info(c)
+			|| ft_isdigit(c) || c == '.' || c == '*')
 		return (1);
 	return (0);
 }

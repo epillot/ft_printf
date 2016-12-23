@@ -6,7 +6,7 @@
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 16:27:32 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/21 18:03:16 by epillot          ###   ########.fr       */
+/*   Updated: 2016/12/23 15:58:14 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,50 @@ static void	get_length_info(const char c, t_option *st)
 		st->length.z = 1;
 }
 
-static void	get_precision(const char **format, t_option *st)
+static void	get_field_width(const char **format, t_option *st, va_list ap)
+{
+	if (ft_isdigit(**format))
+	{
+		st->field_width = ft_atoi(*format);
+		while (ft_isdigit(**format))
+			(*format)++;
+		(*format)--;
+	}
+	else
+	{
+		st->field_width = va_arg(ap, int);
+		if (st->field_width < 0)
+		{
+			st->field_width *= -1;
+			st->flag.left_adjust = 1;
+		}
+	}
+}
+
+static void	get_precision(const char **format, t_option *st, va_list ap)
 {
 	(*format)++;
 	if (ft_isdigit(**format))
+	{
 		st->precision = ft_atoi(*format);
+		while (ft_isdigit(**format))
+			(*format)++;
+		(*format)--;
+	}
+	else if (**format == '*')
+	{
+		st->precision = va_arg(ap, int);
+		if (st->precision < 0)
+			st->precision = -1;
+	}
 	else
+	{
 		st->precision = 0;
-	while (ft_isdigit(**format))
-		(*format)++;
-	(*format)--;
+		(*format)--;
+	}
 }
 
-void		get_option(const char **format, t_option *st)
+void		get_option(const char **format, t_option *st, va_list ap)
 {
 	while (is_format_info(**format))
 	{
@@ -58,18 +89,13 @@ void		get_option(const char **format, t_option *st)
 			get_flag_info(**format, st);
 		else if (is_length_info(**format))
 			get_length_info(**format, st);
-		else if (ft_isdigit(**format))
-		{
-			st->field_width = ft_atoi(*format);
-			while (ft_isdigit(**format))
-				(*format)++;
-			(*format)--;
-		}
+		else if (ft_isdigit(**format) || **format == '*')
+			get_field_width(format, st, ap);
 		else if (**format == '.')
-			get_precision(format, st);
+			get_precision(format, st, ap);
 		(*format)++;
 	}
-	st->id = (is_convert_id(**format) ? **format : 0);
+	st->id = **format;
 	if (st->id)
 		(*format)++;
 }
