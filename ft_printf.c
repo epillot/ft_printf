@@ -45,16 +45,16 @@ static int	add_formated_s(const char **format, va_list ap, char **s, int ret)
 	return (size);
 }
 
-static int	add_other_part(const char **format, int ret, char **s)
+static int	add_other_part(const char *format, int ret, char **s)
 {
 	char	*tmp;
 	int		i;
 
 	tmp = *s;
 	i = 0;
-	while (*(*format + i) && *(*format + i) != '%')
+	while (*(format + i) && *(format + i) != '%')
 		i++;
-	if (!(*s = ft_strnjoin(*s, *format, ret, i)))
+	if (!(*s = ft_strnjoin(*s, format, ret, i)))
 		return (-1);
 	free(tmp);
 	return (i);
@@ -78,7 +78,7 @@ static int	ft_printf_aux(const char *format, va_list ap)
 		}
 		else
 		{
-			if ((size = add_other_part(&format, ret, &s)) == -1)
+			if ((size = add_other_part(format, ret, &s)) == -1)
 				return (-1);
 			ret += size;
 			format += size;
