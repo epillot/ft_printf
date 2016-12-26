@@ -51,6 +51,11 @@ char		*str_format(const char **s, t_option *st, va_list ap, int *size)
 		ws_convert(&str, *st, ap, size);
 	else if (st->id == 's' && st->length.l == 0)
 		s_convert(&str, *st, ap, size);
+	else if (st->id == 'n')
+	{
+		str = ft_strdup("");
+		*size = -2;
+	}
 	else
 		c_convert(&str, *st, ap, size);
 	return (str);

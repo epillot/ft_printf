@@ -32,16 +32,25 @@ static int	add_formated_s(const char **format, va_list ap, char **s, int ret)
 	char		*tmp1;
 	char		*tmp2;
 	int			size;
+	int n;
 
+	n = 0;
 	(*format)++;
 	tmp1 = *s;
 	if (!(*s = str_format(format, &st, ap, &size)))
 		return (-1);
+	if (size == -2)
+	{
+		size = 0;
+		n = 1;
+	}
 	tmp2 = *s;
 	if (!(*s = ft_strnjoin(tmp1, *s, ret, size)))
 		return (-1);
 	free(tmp1);
 	free(tmp2);
+	if (n)
+		return (-2);
 	return (size);
 }
 
@@ -65,6 +74,7 @@ static int	ft_printf_aux(const char *format, va_list ap)
 	char		*s;
 	int			size;
 	int			ret;
+	int	*n;
 
 	s = ft_strdup("");
 	ret = 0;
@@ -74,6 +84,12 @@ static int	ft_printf_aux(const char *format, va_list ap)
 		{
 			if ((size = add_formated_s(&format, ap, &s, ret)) == -1)
 				return (-1);
+			if (size == -2)
+			{
+				if ((n = va_arg(ap, int*)))
+					*n = ret;
+				size = 0;
+			}
 			ret += size;
 		}
 		else
