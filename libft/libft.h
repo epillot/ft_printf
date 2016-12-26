@@ -6,7 +6,7 @@
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 10:17:48 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/23 14:41:30 by epillot          ###   ########.fr       */
+/*   Updated: 2016/12/26 13:36:37 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strtrim(char const *s);
 char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strnjoin(char const *s1, char const *s2, int n, int m);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(intmax_t n);
 void				ft_putchar(char c);

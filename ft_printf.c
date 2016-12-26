@@ -6,25 +6,11 @@
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 14:03:19 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/23 20:00:35 by epillot          ###   ########.fr       */
+/*   Updated: 2016/12/26 14:28:53 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static char	*ft_strnjoin(char const *s1, char const *s2, int n1, int n2)
-{
-	int		i;
-	char	*new;
-
-	i = -1;
-	if (!(new = ft_strnew(n1 + n2)))
-		return (NULL);
-	new = ft_memcpy(new, s1, n1);
-	while (++i < n2)
-		new[n1 + i] = s2[i];
-	return (new);
-}
 
 static int	add_formated_s(const char **format, va_list ap, char **s, int ret)
 {
@@ -32,26 +18,36 @@ static int	add_formated_s(const char **format, va_list ap, char **s, int ret)
 	char		*tmp1;
 	char		*tmp2;
 	int			size;
-	int n;
+	int			n_option;
 
-	n = 0;
+	n_option = 0;
 	(*format)++;
 	tmp1 = *s;
 	if (!(*s = str_format(format, &st, ap, &size)))
 		return (-1);
-	if (size == -2)
+	if (size == -1)
 	{
 		size = 0;
-		n = 1;
+		n_option = 1;
 	}
 	tmp2 = *s;
 	if (!(*s = ft_strnjoin(tmp1, *s, ret, size)))
 		return (-1);
 	free(tmp1);
 	free(tmp2);
-	if (n)
+	if (n_option)
 		return (-2);
 	return (size);
+}
+
+static void	apply_n_option(int ret, int *size, va_list ap)
+{
+	int	*n;
+
+	n = va_arg(ap, int*);
+	if (n != NULL)
+		*n = ret;
+	*size = 0;
 }
 
 static int	add_other_part(const char *format, int ret, char **s)
@@ -69,39 +65,30 @@ static int	add_other_part(const char *format, int ret, char **s)
 	return (i);
 }
 
-static int	ft_printf_aux(const char *format, va_list ap)
+static int	ft_printf_aux(const char *format, va_list ap, char **s)
 {
-	char		*s;
 	int			size;
 	int			ret;
-	int	*n;
 
-	s = ft_strdup("");
 	ret = 0;
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			if ((size = add_formated_s(&format, ap, &s, ret)) == -1)
+			if ((size = add_formated_s(&format, ap, s, ret)) == -1)
 				return (-1);
 			if (size == -2)
-			{
-				if ((n = va_arg(ap, int*)))
-					*n = ret;
-				size = 0;
-			}
+				apply_n_option(ret, &size, ap);
 			ret += size;
 		}
 		else
 		{
-			if ((size = add_other_part(format, ret, &s)) == -1)
+			if ((size = add_other_part(format, ret, s)) == -1)
 				return (-1);
-			ret += size;
 			format += size;
+			ret += size;
 		}
 	}
-	write(1, s, ret);
-	free(s);
 	return (ret);
 }
 
@@ -109,9 +96,14 @@ int			ft_printf(const char *format, ...)
 {
 	va_list		ap;
 	int			ret;
+	char		*s;
 
+	if (!(s = ft_strdup("")))
+		return (-1);
 	va_start(ap, format);
-	ret = ft_printf_aux(format, ap);
+	ret = ft_printf_aux(format, ap, &s);
+	write(1, s, ret);
+	free(s);
 	va_end(ap);
 	return (ret);
 }

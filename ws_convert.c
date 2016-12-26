@@ -6,7 +6,7 @@
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 14:36:01 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/23 17:40:44 by epillot          ###   ########.fr       */
+/*   Updated: 2016/12/26 14:32:21 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	get_wchar_size(wchar_t c)
 {
-	if (c <= 0x7f)
+	if (c >= 0 && c <= 0x7f)
 		return (1);
 	if (c >= 0x80 && c <= 0x7ff)
 		return (2);

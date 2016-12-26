@@ -6,7 +6,7 @@
 #    By: epillot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/14 19:24:31 by epillot           #+#    #+#              #
-#    Updated: 2016/12/23 14:45:49 by epillot          ###   ########.fr        #
+#    Updated: 2016/12/26 14:37:12 by epillot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ OPTION = -c
 
 SRC = get_option.c\
 	  get_param.c\
-	  is_format_info.c\
 	  d_convert.c\
 	  u_convert.c\
 	  c_convert.c\
@@ -28,6 +27,7 @@ SRC = get_option.c\
 	  str_format.c\
 	  encode_unicode.c\
 	  tools_for_convert.c\
+	  tools_for_convert2.c\
 	  ft_printf.c\
 
 OBJ = $(SRC:.c=.o)
