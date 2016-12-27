@@ -42,6 +42,7 @@ typedef struct	s_option
 	int			precision;
 	t_length	length;
 	char		id;
+	
 }				t_option;
 
 typedef struct	s_size
