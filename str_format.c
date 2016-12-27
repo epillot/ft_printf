@@ -6,7 +6,7 @@
 /*   By: epillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 14:21:24 by epillot           #+#    #+#             */
-/*   Updated: 2016/12/23 18:39:18 by epillot          ###   ########.fr       */
+/*   Updated: 2016/12/26 14:11:24 by epillot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char		*str_format(const char **s, t_option *st, va_list ap, int *size)
 	else if (st->id == 'n')
 	{
 		str = ft_strdup("");
-		*size = -2;
+		*size = -1;
 	}
 	else
 		c_convert(&str, *st, ap, size);

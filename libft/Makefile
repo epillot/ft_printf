@@ -6,7 +6,7 @@
 #    By: epillot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 15:38:05 by epillot           #+#    #+#              #
-#    Updated: 2016/12/23 14:41:54 by epillot          ###   ########.fr        #
+#    Updated: 2016/12/26 13:35:03 by epillot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRC = ft_atoi.c\
 	  ft_strequ.c\
 	  ft_striteri.c\
 	  ft_strjoin.c\
+	  ft_strnjoin.c\
 	  ft_strlen.c\
 	  ft_strlcat.c\
 	  ft_strmap.c\
